@@ -16,6 +16,8 @@ class HTMLRenderer {
 			var encoding = this.encodings[i];
 			var encodingOptions = merge(this.options, encoding.options);
 
+			encodingOptions.barcodePadding = encoding.barcodePadding;
+
 			var table = this.createTable(encodingOptions, i == 0, i == this.encodings.length - 1);
 			
 			this.drawTableText(table, encodingOptions, encoding, "top");
@@ -24,9 +26,10 @@ class HTMLRenderer {
 
 			table.push('</table>');
 			this.object.barcode = this.object.barcode.concat(table);
-			this.aHTML.push(table.join(""));
 		}
 
+		this.object.barcode.push('</div>');
+		this.aHTML.push(this.object.barcode.join(""));
 		this.aHTML.push('</body>');
 		this.aHTML.push('</html>');
 		this.object.barcode = this.object.barcode.join("");
@@ -36,7 +39,7 @@ class HTMLRenderer {
 	prepareHTML(){
         // Clear the HTML
 		this.object.HTML = "";
-		this.object.barcode = [];
+		this.object.barcode = ['<div style="display:inline-block;">'];
 
 		// Initial HTML structure
 		this.aHTML = [];
@@ -83,10 +86,10 @@ class HTMLRenderer {
 	}
 
 	createTable(options, first, last) {
-		var marginLeft = first ? options.marginLeft : 0;
+		var marginLeft = (first ? options.marginLeft : 0) + options.barcodePadding;
 		var marginRight = last ? options.marginRight : 0;
 
-		var table = '<table style="display:inline-block;vertical-align: top;border:0;border-collapse:collapse;margin-top:' + options.marginTop + 'px;margin-bottom:' + options.marginBottom + 'px;margin-left:' + marginLeft + 'px;margin-right:' + marginRight + 'px;">';
+		var table = '<table style="float:left;border:0;border-collapse:collapse;margin-top:' + options.marginTop + 'px;margin-bottom:' + options.marginBottom + 'px;margin-left:' + marginLeft + 'px;margin-right:' + marginRight + 'px;">';
 
 		return [table];
 	}

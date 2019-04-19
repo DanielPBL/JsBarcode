@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<script src="../dist/JsBarcode.all.js"></script>
+	<script src="../dist/JsBarcode.all.min.js"></script>
 	<script>
 		Number.prototype.zeroPadding = function(){
 			var ret = "" + this.valueOf();
@@ -39,11 +39,29 @@
 	</div>
 
 	<div>
-		<img id="barcode4"/>
+		<div id="barcode4">
+		<script>
+			var object = {
+				html: true
+			};
+
+			JsBarcode(object, "9780199532179", {
+				format: "EAN13",
+				displayValue: true,
+				fontSize: 20
+			});
+
+			document.querySelector("#barcode4").innerHTML = object.barcode;
+			console.log(object.HTML);
+		</script>
+	</div>
+
+	<div>
+		<img id="barcode5"/>
 		<script>
 			var repeat4 = function(){
 				var date = new Date();
-				JsBarcode("#barcode4",
+				JsBarcode("#barcode5",
 						date.getHours().zeroPadding() + ":" +
 						date.getMinutes().zeroPadding() + ":" +
 						date.getSeconds().zeroPadding(),
