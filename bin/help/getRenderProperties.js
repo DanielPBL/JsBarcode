@@ -70,14 +70,21 @@ function getRenderProperties(element) {
 								element: element,
 								renderer: _renderers2.default.CanvasRenderer
 							};
-						} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
-							return {
-								element: element,
-								renderer: _renderers2.default.ObjectRenderer
-							};
-						} else {
-							throw new _exceptions.InvalidElementException();
 						}
+						// if object flaged as HTML
+						else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && element.html) {
+								return {
+									element: element,
+									renderer: _renderers2.default.HTMLRenderer
+								};
+							} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
+								return {
+									element: element,
+									renderer: _renderers2.default.ObjectRenderer
+								};
+							} else {
+								throw new _exceptions.InvalidElementException();
+							}
 }
 
 function querySelectedRenderProperties(string) {

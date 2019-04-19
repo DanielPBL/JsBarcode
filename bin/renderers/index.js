@@ -16,6 +16,10 @@ var _object = require('./object.js');
 
 var _object2 = _interopRequireDefault(_object);
 
+var _html = require('./html.js');
+
+var _html2 = _interopRequireDefault(_html);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = { CanvasRenderer: _canvas2.default, SVGRenderer: _svg2.default, ObjectRenderer: _object2.default };
+exports.default = { CanvasRenderer: _canvas2.default, SVGRenderer: _svg2.default, ObjectRenderer: _object2.default, HTMLRenderer: _html2.default };

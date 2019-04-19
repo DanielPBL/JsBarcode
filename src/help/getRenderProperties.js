@@ -61,6 +61,13 @@ function getRenderProperties(element){
 			renderer: renderers.CanvasRenderer
 		};
 	}
+	// if object flaged as HTML
+	else if(element && typeof element === 'object' && element.html) {
+		return {
+			element: element,
+			renderer: renderers.HTMLRenderer
+		};
+	}
 	else if(element && typeof element === 'object' && !element.nodeName) {
 		return {
 			element: element,
